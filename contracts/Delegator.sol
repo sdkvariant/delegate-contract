@@ -99,9 +99,17 @@ address public lender;
         token.safeTransfer(msg.sender, token.balanceOf(address(this)));
     }
 
+
+
     address public borrower;
 
     modifier onlyBorrower {
         require(msg.sender == borrower, "Sender is not the borrower");
         _;
     }
+
+    function borrowDelegatedCredit(
+            address asset,
+            uint256 amount,
+            bool variable
+        ) external onlyBorrower {
