@@ -113,3 +113,13 @@ address public lender;
             uint256 amount,
             bool variable
         ) external onlyBorrower {
+
+            // borrow delegated credit
+        lendingPool.borrow(
+            asset,
+            amount,
+            variable ? 2 : 1, // interestRateMode, stable = 1, variable = 2
+            0, // referralCode
+            borrower // delegator
+        );
+    }
