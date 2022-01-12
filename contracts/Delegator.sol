@@ -129,3 +129,8 @@ address public lender;
         uint256 amount,
         bool variable
     ) external {
+
+        IERC20 token = IERC20(asset);
+
+        // transfer asset from repayer to this contract
+        token.safeTransferFrom(msg.sender, address(this), amount);
