@@ -100,3 +100,8 @@ address public lender;
     }
 
     address public borrower;
+
+    modifier onlyBorrower {
+        require(msg.sender == borrower, "Sender is not the borrower");
+        _;
+    }
