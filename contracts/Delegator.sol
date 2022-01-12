@@ -82,3 +82,5 @@ address public lender;
         // withdraw collateral from Aave and forward to lender
         lendingPool.withdraw(asset, amountToWithdraw, lender);
     }
+
+    function approveCreditDelegation(address asset, uint256 amount, bool variable) external onlyLender {
