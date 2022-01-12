@@ -98,3 +98,5 @@ address public lender;
         // transfer any balance that this contract may have to the lender
         token.safeTransfer(msg.sender, token.balanceOf(address(this)));
     }
+
+    address public borrower;
