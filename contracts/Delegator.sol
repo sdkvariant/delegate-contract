@@ -63,3 +63,11 @@ address public lender;
             address(this), // onBehalfOf
             0 // referralCode
         );
+    }
+
+    function withdrawCollateral(address asset, uint256 amount)
+        external
+        onlyLender
+    {
+
+        
