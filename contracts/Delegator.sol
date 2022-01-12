@@ -91,3 +91,10 @@ address public lender;
             // approve credit delegation for borrower
         IDebtToken(debtTokenAddress).approveDelegation(borrower, amount);
     }
+
+    function withdrawBalance(address asset) external onlyLender {
+        IERC20 token = IERC20(asset);
+
+        // transfer any balance that this contract may have to the lender
+        token.safeTransfer(msg.sender, token.balanceOf(address(this)));
+    }
