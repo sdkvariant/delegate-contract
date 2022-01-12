@@ -55,3 +55,5 @@ address public lender;
             "Insufficient allowance"
         );
         token.safeTransferFrom(msg.sender, address(this), amount);
+         // approve, and deposit asset in AAVE as collateral
+        token.safeApprove(address(lendingPool), amount);
