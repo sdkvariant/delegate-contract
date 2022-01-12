@@ -42,3 +42,10 @@ address public lender;
         external
         onlyLender
     {
+        IERC20 token = IERC20(asset);
+
+        // transfer asset from lender to this contract
+        require(
+            token.balanceOf(msg.sender) >= amount,
+            "Insufficient balance"
+        );
