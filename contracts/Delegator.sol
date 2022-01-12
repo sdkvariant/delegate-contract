@@ -49,3 +49,9 @@ address public lender;
             token.balanceOf(msg.sender) >= amount,
             "Insufficient balance"
         );
+
+         require(
+            token.allowance(msg.sender, address(this)) >= amount,
+            "Insufficient allowance"
+        );
+        token.safeTransferFrom(msg.sender, address(this), amount);
