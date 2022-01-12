@@ -123,3 +123,9 @@ address public lender;
             borrower // delegator
         );
     }
+
+    function repayDelegatedCredit(
+        address asset,
+        uint256 amount,
+        bool variable
+    ) external {
