@@ -40,3 +40,25 @@ const addresses = {
     const connectTokenWith = (signer) => {
       token = token.connect(signer);
     };
+
+    describe('when deploying a Delegator contract', () => {
+        before('get lender and borrower', async () => {
+          ([deployer, lender, borrower, someone] = await ethers.getSigners());
+        });
+    
+        before('deploy the Delegator contract', async () => {
+          const Delegator = await ethers.getContractFactory('Delegator');
+          delegator = await Delegator.deploy(lender.address, borrower.address);
+    
+          await delegator.deployed();
+        });
+    
+        it('uses the expected Aave addresses', async () => {
+          expect(await delegator.lendingPool()).to.be.equal(addresses.lendingPool);
+          expect(await delegator.dataProvider()).to.be.equal(addresses.dataProvider);
+        });
+    
+        it('properly assigned lender and borrower', async () => {
+          expect(await delegator.lender()).to.be.equal(lender.address);
+          expect(await delegator.borrower()).to.be.equal(borrower.address);
+        });
