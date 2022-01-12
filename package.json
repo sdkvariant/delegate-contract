@@ -1,0 +1,25 @@
+{
+  "name": "delegate-contract",
+  "version": "1.0.0",
+  "description": "Credit delegation contract",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chefking/delegate-contract.git"
+  },
+  "keywords": [
+    "defi"
+  ],
+  "author": "chefking (David0x)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chefking/delegate-contract/issues"
+  },
+  "homepage": "https://github.com/chefking/delegate-contract#readme",
+  "dependencies": {
+    "hardhat": "^2.8.2"
+  }
+}
