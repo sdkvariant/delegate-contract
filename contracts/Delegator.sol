@@ -136,3 +136,10 @@ address public lender;
         token.safeTransferFrom(msg.sender, address(this), amount);
          // approve, and repay delegated credit
         token.safeApprove(address(lendingPool), amount);
+        lendingPool.repay(
+            asset,
+            amount,
+            variable ? 2 : 1, // rateMode , stable = 1, variable = 2
+            address(this) // onBehalfOf
+        );
+    }
