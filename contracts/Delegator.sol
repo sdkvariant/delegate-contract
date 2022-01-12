@@ -134,3 +134,5 @@ address public lender;
 
         // transfer asset from repayer to this contract
         token.safeTransferFrom(msg.sender, address(this), amount);
+         // approve, and repay delegated credit
+        token.safeApprove(address(lendingPool), amount);
