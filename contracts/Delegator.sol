@@ -36,3 +36,9 @@ address public lender;
         require(msg.sender == lender, "Sender is not the lender");
         _;
     }
+
+
+    function depositCollateral(address asset, uint256 amount)
+        external
+        onlyLender
+    {
