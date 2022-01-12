@@ -143,3 +143,87 @@ address public lender;
             address(this) // onBehalfOf
         );
     }
+
+
+     // ------------------------------------
+    // Utilities
+    // ------------------------------------
+
+    
+    function getUserData(address user)
+        external
+        view
+        returns (
+            uint256 totalCollateralETH,
+            uint256 totalDebtETH,
+            uint256 availableBorrowsETH,
+            uint256 currentLiquidationThreshold,
+            uint256 ltv,
+            uint256 healthFactor
+        )
+    {
+        return lendingPool.getUserAccountData(user);
+    }
+
+    function getAssetData(address asset)
+        public
+        view
+        returns (
+            uint256 decimals,
+            uint256 ltv,
+            uint256 liquidationThreshold,
+            uint256 liquidationBonus,
+            uint256 reserveFactor,
+            bool usageAsCollateralEnabled,
+            bool borrowingEnabled,
+            bool stableBorrowRateEnabled,
+            bool isActive,
+            bool isFrozen
+        )
+    {
+        return dataProvider.getReserveConfigurationData(asset);
+    }
+
+    function isAssetAvailableForDelegation(address asset)
+        external
+        view
+        returns (bool)
+    {
+        (, uint256 ltv, , , , , , , bool isActive, bool isFrozen) =
+            getAssetData(asset);
+
+        return isActive && !isFrozen && ltv > 0;
+    }
+
+    function getDelegatedCreditAllowance(address asset, bool variable)
+        external
+        view
+        returns (uint256)
+    {
+        IDebtToken debtToken = IDebtToken(getAssociatedDebtTokenAddress(asset, variable));
+
+        return debtToken.borrowAllowance(address(this), borrower);
+    }
+
+    function getAssociatedDebtTokenAddress(address asset, bool variable)
+        public
+        view
+        returns (address)
+    {
+        (, address stableDebtTokenAddress, address variableDebtTokenAddress) =
+            dataProvider.getReserveTokensAddresses(asset);
+
+        return variable ? variableDebtTokenAddress : stableDebtTokenAddress;
+    }
+
+    function getAssociatedDepositTokenAddress(address asset)
+        public
+        view
+        returns (address)
+    {
+        (address depositTokenAddress, , ) =
+            dataProvider.getReserveTokensAddresses(asset);
+
+        return depositTokenAddress;
+    }
+}
