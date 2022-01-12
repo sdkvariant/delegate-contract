@@ -57,3 +57,9 @@ address public lender;
         token.safeTransferFrom(msg.sender, address(this), amount);
          // approve, and deposit asset in AAVE as collateral
         token.safeApprove(address(lendingPool), amount);
+        lendingPool.deposit(
+            asset,
+            amount,
+            address(this), // onBehalfOf
+            0 // referralCode
+        );
