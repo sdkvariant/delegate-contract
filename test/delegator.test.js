@@ -18,3 +18,25 @@ const addresses = {
     sUSD: '0xEb3107117FEAd7de89Cd14D463D340A2E6917769', // Synthetix protocolDAO
     DAI: '0x0B30483057D6A7798378EdbA707d625116Ed7640',
   };
+
+  describe("Delegator", function() {
+    // Contracts
+    let delegator, token;
+  
+    // Users
+    let deployer, someone;
+    let lender, borrower;
+  
+    // Used to compare values
+    const tokenBalance = {};
+    const collateralETH = {};
+    const availableBorrowsETH = {};
+    const totalDebtETH = {};
+  
+    const connectDelegatorWith = (signer) => {
+      delegator = delegator.connect(signer);
+    };
+  
+    const connectTokenWith = (signer) => {
+      token = token.connect(signer);
+    };
