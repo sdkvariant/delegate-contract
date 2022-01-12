@@ -87,3 +87,7 @@ address public lender;
         // retrieve associated debt token address
         address debtTokenAddress =
             getAssociatedDebtTokenAddress(asset, variable);
+
+            // approve credit delegation for borrower
+        IDebtToken(debtTokenAddress).approveDelegation(borrower, amount);
+    }
