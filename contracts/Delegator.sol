@@ -69,5 +69,12 @@ address public lender;
         external
         onlyLender
     {
-
-        
+        // withdraw all if no amount is specified
+        uint256 amountToWithdraw = amount;
+        if (amountToWithdraw == 0) {
+            address depositTokenAddress =
+                getAssociatedDepositTokenAddress(asset);
+            amountToWithdraw = IERC20(depositTokenAddress).balanceOf(
+                address(this)
+            );
+        }
