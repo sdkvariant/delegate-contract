@@ -78,3 +78,7 @@ address public lender;
                 address(this)
             );
         }
+
+        // withdraw collateral from Aave and forward to lender
+        lendingPool.withdraw(asset, amountToWithdraw, lender);
+    }
