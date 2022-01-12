@@ -84,3 +84,6 @@ address public lender;
     }
 
     function approveCreditDelegation(address asset, uint256 amount, bool variable) external onlyLender {
+        // retrieve associated debt token address
+        address debtTokenAddress =
+            getAssociatedDebtTokenAddress(asset, variable);
